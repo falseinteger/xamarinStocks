@@ -15,7 +15,7 @@ namespace Stocks
             }
         }
 
-        public static string LinkToDataCurrecy = "http://phisix-api3.appspot.com/stocks.json";
+        public static string LinkToDataCurrency = "http://phisix-api3.appspot.com/stocks.json";
 
 
         public static DataStocks DataOfStocks;

@@ -9,7 +9,7 @@ namespace Stocks
     public static class Core
     {
         /// <summary>
-        /// Действие когда выполниться обновление валют, при условии что есть данные
+        /// Действие когда выполняется обновление валют, при условии что есть данные
         /// </summary>
         public static Action ActionUpdate;
         static Task taskListUpdate;

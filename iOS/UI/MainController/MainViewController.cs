@@ -10,12 +10,13 @@ namespace Stocks.iOS
 {
 	public partial class MainViewController : UIViewController
 	{
-        //Таймер не глобальный так, что релизация происходит его здесь
+        // Таймер не глобальный так, что релизация происходит его здесь
         Timer timerUpdate;
 
 		public MainViewController (IntPtr handle) : base (handle)
 		{
-            // Создаем обновлялку
+            // Добавление действие при успешном получении данных
+            Core.ActionUpdate = null;
             Core.ActionUpdate += () => {
                 if (TableView == null)
                     return;
@@ -26,7 +27,7 @@ namespace Stocks.iOS
                 InvokeOnMainThread(() => {
                     (TableView.Source as MainViewSource).UpdateItems(Global.DataOfStocks?.Stocks);
 
-                    // Если у нас нет ячек тогда обновим все
+                    // Если у нас нет ячейки тогда обновим полностью таблицу
                     if(TableView.IndexPathsForVisibleRows.Length == 0) {
                         TableView.ReloadData();
                         UIView.AnimateNotify(0.45, () => {
@@ -39,7 +40,7 @@ namespace Stocks.iOS
                     // Обновить только те ячейки которым мы видим
                     TableView.ReloadRows(TableView.IndexPathsForVisibleRows, UITableViewRowAnimation.Middle);
                 });
-                // Проверяем не остановился наш таймер
+                // Проверить не остановить наш таймер
                 if (!timerUpdate.Enabled)
                     timerUpdate.Start();
             };
@@ -64,7 +65,7 @@ namespace Stocks.iOS
                 // Останавливаем таймер
                 timerUpdate.Stop();
 
-                //Запускаем ручное обновление
+                // Запускаем ручное обновление
                 Core.StartUpdateStocks();
             };
 
@@ -76,11 +77,11 @@ namespace Stocks.iOS
         {
             base.ViewDidDisappear(animated);
 
-            //Останавливаем таймер если он работает
+            // Останавливаем таймер если он работает
             timerUpdate.Stop();
             timerUpdate.Dispose();
 
-            // Уничтажение действие на экране
+            // Уничтожение действия на экране
             Core.ActionUpdate = null;
             // Закрываем работающие задачи
             Core.DisposeUpdateStocks();

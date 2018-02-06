@@ -14,7 +14,7 @@ namespace Stocks.iOS
         List<ItemStock> Items;
 
         /// <summary>
-        /// Иницилицаия списка валют
+        /// Инициализация списка валют
         /// </summary>
         /// <param name="newItems">New items.</param>
         public MainViewSource(IList<ItemStock> newItems)

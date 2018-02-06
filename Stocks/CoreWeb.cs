@@ -17,7 +17,7 @@ namespace Stocks
             try
             {
                 System.Diagnostics.Debug.WriteLine("[GetDataCurrency] Start");
-                var respone = await Global.WebClient.GetAsync(Global.LinkToDataCurrecy);
+                var respone = await Global.WebClient.GetAsync(Global.LinkToDataCurrency);
                 var resultContent = await respone.Content.ReadAsStringAsync();
 
                 if(respone.StatusCode != System.Net.HttpStatusCode.OK)

@@ -27,8 +27,6 @@ namespace Stocks.iOS
             LabelNameOfCurrency.Text = !string.IsNullOrEmpty(item.Name) ? item.Name : "None Name";
             LabelAmount.Text = item.Price.Amount.ToString("0.00");
             LabelVolume.Text = item.Volume.ToString();
-
-
         }
 
 	}
